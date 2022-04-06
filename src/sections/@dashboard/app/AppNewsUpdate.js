@@ -9,13 +9,14 @@ import { mockImgCover } from '../../../utils/mockImages';
 //
 import Scrollbar from '../../../components/Scrollbar';
 import Iconify from '../../../components/Iconify';
+import { notice } from '../../../_mocks_/tableData';
 
 // ----------------------------------------------------------------------
 
 const NEWS = [...Array(5)].map((_, index) => {
   const setIndex = index + 1;
   return {
-    title: faker.name.title(),
+    title: notice[Math.floor(Math.random() * 4)],
     description: faker.lorem.paragraphs(),
     image: mockImgCover(setIndex),
     postedAt: faker.date.soon()
@@ -59,7 +60,7 @@ function NewsItem({ news }) {
 export default function AppNewsUpdate() {
   return (
     <Card>
-      <CardHeader title="News Update" />
+      <CardHeader title="Latest Notice" />
 
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3, pr: 0 }}>

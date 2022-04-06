@@ -1,6 +1,7 @@
 // material
 import { alpha, styled } from '@mui/material/styles';
 import { Card, Typography } from '@mui/material';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 // utils
 import { fShortenNumber } from '../../../utils/formatNumber';
 // component
@@ -34,17 +35,16 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const TOTAL = 714000;
-
 export default function AppWeeklySales() {
   return (
     <RootStyle>
       <IconWrapperStyle>
-        <Iconify icon="ant-design:android-filled" width={24} height={24} />
+        {/* <Iconify icon="ant-design:android-filled" width={24} height={24} /> */}
+        <AssessmentIcon/>
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">95%</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Weekly Sales
+        Current Academic Score
       </Typography>
     </RootStyle>
   );

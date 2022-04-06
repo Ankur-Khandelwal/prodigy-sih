@@ -1,5 +1,6 @@
 // material
-import { Box, Grid, Container, Typography } from '@mui/material';
+import { Box, Grid, Container, Typography, Button } from '@mui/material';
+import account from '../_mocks_/account';
 // components
 import Page from '../components/Page';
 import {
@@ -20,11 +21,22 @@ import {
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
+
+  // const downloadReport = () => {
+
+  // }
   return (
     <Page title="Dashboard | Minimal-UI">
       <Container maxWidth="xl">
         <Box sx={{ pb: 5 }}>
-          <Typography variant="h4">Hi, Welcome back</Typography>
+          <Typography variant="h4">Hi {account.displayName.split(" ")[0]}, Welcome back</Typography>
+          {/* <Button 
+            variant="contained" 
+            color="success"
+            onClick={() => {downloadReport}}
+          >
+            Download Report Card
+          </Button> */}
         </Box>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
@@ -64,11 +76,11 @@ export default function DashboardApp() {
             <AppOrderTimeline />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={4}>
+          {/* <Grid item xs={12} md={6} lg={4}>
             <AppTrafficBySite />
-          </Grid>
+          </Grid> */}
 
-          <Grid item xs={12} md={6} lg={8}>
+          <Grid item xs={12} md={6} lg={12}>
             <AppTasks />
           </Grid>
         </Grid>

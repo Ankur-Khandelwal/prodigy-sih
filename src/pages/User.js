@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
 // material
 import {
   Card,
@@ -16,8 +18,19 @@ import {
   Container,
   Typography,
   TableContainer,
-  TablePagination
+  TablePagination,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
 } from '@mui/material';
+
 // components
 import Page from '../components/Page';
 import Label from '../components/Label';
@@ -31,10 +44,10 @@ import USERLIST from '../_mocks_/user';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'role', label: 'Role', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
+  { id: 'name', label: 'Event Name', alignRight: false },
+  { id: 'company', label: 'Scope', alignRight: false },
+  { id: 'role', label: 'Rank', alignRight: false },
+  { id: 'field', label: 'Field', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
   { id: '' }
 ];
@@ -77,6 +90,107 @@ export default function User() {
   const [orderBy, setOrderBy] = useState('name');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [open, setOpen] = useState(false);
+  const [field, setField] = useState('');
+  const [scope, setScope] = useState('');
+  const [rank, setRank] = useState('');
+
+  const handleFieldChange = (event) => {
+    setField(event.target.value);
+  };
+
+  const handleScopeChange = (event) => {
+    setScope(event.target.value);
+  };
+
+  const handleRankChange = (event) => {
+    setRank(event.target.value);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const Input = styled('input')({
+    display: 'none',
+  });  
+
+  const popupDialog = () => (
+    <Dialog open={open} onClose={handleClose}>
+      <DialogTitle>Create Achievement Approval Request</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Fill all the relevant details of your achievement properly. Once approved by teachers, the
+          respective EC points will be added to your total.
+        </DialogContentText>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Name of the Event"
+          type="text"
+          fullWidth
+          variant="standard"
+        />
+      </DialogContent>
+      <Stack direction="row" alignItems="center" spacing={2} sx={{paddingLeft: 1}}>
+        <FormControl sx={{ m: 1, minWidth: 200 }}>
+          <InputLabel id="field">Field</InputLabel>
+          <Select
+            labelId="field"
+            id="field-i"
+            value={field}
+            label="Field"
+            onChange={handleFieldChange}
+          >
+            <MenuItem value={10}>Sports</MenuItem>
+            <MenuItem value={20}>Performing Arts</MenuItem>
+            <MenuItem value={30}>Fine Arts</MenuItem>
+            <MenuItem value={40}>Literature</MenuItem>
+            <MenuItem value={50}>Others</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="scope">Scope</InputLabel>
+          <Select
+            labelId="scope"
+            id="scope-i"
+            value={scope}
+            label="Scope"
+            onChange={handleScopeChange}
+          >
+            <MenuItem value={10}>School</MenuItem>
+            <MenuItem value={20}>Regional</MenuItem>
+            <MenuItem value={30}>National</MenuItem>
+            <MenuItem value={30}>International</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="rank">Rank</InputLabel>
+          <Select labelId="rank" id="rank-i" value={rank} label="Rank" onChange={handleRankChange}>
+            <MenuItem value={10}>1st</MenuItem>
+            <MenuItem value={20}>2nd</MenuItem>
+            <MenuItem value={30}>3rd</MenuItem>
+            <MenuItem value={30}>Participant</MenuItem>
+          </Select>
+        </FormControl>
+      </Stack>
+      <label htmlFor="contained-button-file">
+        <Input id="contained-button-file" multiple type="file" />
+        <Button variant="contained" component="span" sx={{marginLeft: 2, marginTop: 2}}>
+          Upload Proof of Achievement
+        </Button>
+      </label>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button variant="outlined" onClick={handleClose}>Create Request</Button>
+      </DialogActions>
+    </Dialog>
+  );
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -135,15 +249,18 @@ export default function User() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            User
+            Extra-Curricular Achievements
           </Typography>
           <Button
             variant="contained"
             component={RouterLink}
             to="#"
             startIcon={<Iconify icon="eva:plus-fill" />}
+            onClick={() => {
+              handleClickOpen();
+            }}
           >
-            New User
+            New Request
           </Button>
         </Stack>
 
@@ -170,7 +287,7 @@ export default function User() {
                   {filteredUsers
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const { id, name, role, status, company, avatarUrl, isVerified } = row;
+                      const { id, name, role, status, company, avatarUrl, field } = row;
                       const isItemSelected = selected.indexOf(name) !== -1;
 
                       return (
@@ -198,11 +315,11 @@ export default function User() {
                           </TableCell>
                           <TableCell align="left">{company}</TableCell>
                           <TableCell align="left">{role}</TableCell>
-                          <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
+                          <TableCell align="left">{field}</TableCell>
                           <TableCell align="left">
                             <Label
                               variant="ghost"
-                              color={(status === 'banned' && 'error') || 'success'}
+                              color={(status === 'rejected' && 'error') || (status === 'pending' && 'secondary') || 'success'}
                             >
                               {sentenceCase(status)}
                             </Label>
@@ -244,6 +361,7 @@ export default function User() {
           />
         </Card>
       </Container>
+      {popupDialog()}
     </Page>
   );
 }

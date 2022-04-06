@@ -32,9 +32,9 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 const CHART_DATA = [
-  { name: 'Series 1', data: [80, 50, 30, 40, 100, 20] },
-  { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
-  { name: 'Series 3', data: [44, 76, 78, 13, 43, 10] }
+  { name: 'First Term', data: [80, 50, 30, 40, 90, 20] },
+  { name: 'Second Term', data: [20, 90, 40, 80, 20, 80] },
+  { name: 'Final', data: [44, 76, 78, 13, 93, 10] }
 ];
 
 export default function AppCurrentSubject() {
@@ -45,7 +45,7 @@ export default function AppCurrentSubject() {
     fill: { opacity: 0.48 },
     legend: { floating: true, horizontalAlign: 'center' },
     xaxis: {
-      categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
+      categories: ['English', 'History', 'Physics', 'Geography', 'Hindi', 'Math'],
       labels: {
         style: {
           colors: [
@@ -63,7 +63,7 @@ export default function AppCurrentSubject() {
 
   return (
     <Card>
-      <CardHeader title="Current Subject" />
+      <CardHeader title="Subject Mark Distribution" />
       <ChartWrapperStyle dir="ltr">
         <ReactApexChart type="radar" series={CHART_DATA} options={chartOptions} height={340} />
       </ChartWrapperStyle>

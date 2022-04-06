@@ -1,6 +1,7 @@
 // material
 import { alpha, styled } from '@mui/material/styles';
 import { Card, Typography } from '@mui/material';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 // utils
 import { fShortenNumber } from '../../../utils/formatNumber';
 // component
@@ -34,17 +35,16 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const TOTAL = 1352831;
-
 export default function AppNewUsers() {
   return (
     <RootStyle>
       <IconWrapperStyle>
-        <Iconify icon="ant-design:apple-filled" width={24} height={24} />
+        {/* <Iconify icon="ant-design:apple-filled" width={24} height={24} /> */}
+        <DirectionsRunIcon/>
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">719</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        New Users
+        Total EC Points
       </Typography>
     </RootStyle>
   );

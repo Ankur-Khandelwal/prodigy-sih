@@ -10,11 +10,7 @@
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended"
   ],
-  "plugins": [
-    "prettier",
-    "react",
-    "react-hooks"
-  ],
+  "plugins": ["prettier", "react", "react-hooks"],
   "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 8,
@@ -62,7 +58,7 @@
       }
     ],
     "prettier/prettier": [
-      2,
+      0,
       {
         "printWidth": 100,
         "singleQuote": true,

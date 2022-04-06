@@ -14,11 +14,9 @@ import {
 // ----------------------------------------------------------------------
 
 const TASKS = [
-  'Create FireStone Logo',
-  'Add SCSS and JS files if required',
-  'Stakeholder Meeting',
-  'Scoping & Estimations',
-  'Sprint Showcase'
+  'You are continuosuly improving for the last 5 months. Keep it up!',
+  'No Extra-curricular activity noted for the last 1 month. Start Hustling!',
+  'A perpetual decrease in English and History marks has been noticed. While you are doing good in other subjects, you need to improve in English and History.'
 ];
 
 // ----------------------------------------------------------------------
@@ -70,18 +68,15 @@ export default function AppTasks() {
 
   return (
     <Card>
-      <CardHeader title="Tasks" />
+      <CardHeader title="Feedbacks" />
       <Box sx={{ px: 3, py: 1 }}>
         <FormikProvider value={formik}>
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-            {TASKS.map((task) => (
-              <TaskItem
-                key={task}
-                task={task}
-                formik={formik}
-                checked={values.checked.includes(task)}
-              />
-            ))}
+            <ul>
+              {TASKS.map((task) => (
+                <li style={{marginBottom: "10px"}}>{task}</li>
+              ))}
+            </ul>
           </Form>
         </FormikProvider>
       </Box>

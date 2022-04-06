@@ -1,6 +1,7 @@
 // material
 import { alpha, styled } from '@mui/material/styles';
 import { Card, Typography } from '@mui/material';
+import PeopleIcon from '@mui/icons-material/People';
 // utils
 import { fShortenNumber } from '../../../utils/formatNumber';
 //
@@ -40,11 +41,12 @@ export default function AppItemOrders() {
   return (
     <RootStyle>
       <IconWrapperStyle>
-        <Iconify icon="ant-design:windows-filled" width={24} height={24} />
+        {/* <Iconify icon="ant-design:windows-filled" width={24} height={24} /> */}
+        <PeopleIcon/>
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">85%</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Item Orders
+      Attendance
       </Typography>
     </RootStyle>
   );
